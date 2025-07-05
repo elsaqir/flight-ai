@@ -32,16 +32,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             initial={{ x: -320 }}
             animate={{ x: 0 }}
             exit={{ x: -320 }}
-            className="fixed left-0 top-0 bottom-0 w-80 bg-primary-bg border-r border-border-primary z-50 flex flex-col"
+            className="fixed left-0 top-0 bottom-0 w-80 bg-white/90 backdrop-blur-xl border-r border-slate-200 z-50 flex flex-col"
           >
-            <div className="p-6 border-b border-border-primary">
+            <div className="p-6 border-b border-slate-200">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-text-primary">Menu</h2>
+                <h2 className="text-xl font-bold text-slate-900">Menu</h2>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-primary-secondary rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
                 >
-                  <X size={20} className="text-text-primary" />
+                  <X size={20} className="text-slate-700" />
                 </button>
               </div>
             </div>
@@ -55,26 +55,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={item.action}
-                    className="w-full flex items-center gap-3 p-3 hover:bg-primary-secondary rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 p-4 hover:bg-slate-100 rounded-2xl transition-colors text-left"
                   >
-                    <item.icon size={20} className="text-text-secondary" />
-                    <span className="text-text-primary">{item.label}</span>
+                    <item.icon size={20} className="text-slate-600" />
+                    <span className="text-slate-900 font-medium">{item.label}</span>
                   </motion.button>
                 ))}
               </div>
             </div>
 
-            <div className="p-6 border-t border-border-primary">
+            <div className="p-6 border-t border-slate-200">
               <button
                 onClick={toggleTheme}
-                className="w-full flex items-center gap-3 p-3 hover:bg-primary-secondary rounded-lg transition-colors"
+                className="w-full flex items-center gap-3 p-4 hover:bg-slate-100 rounded-2xl transition-colors"
               >
                 {theme === 'light' ? (
-                  <Moon size={20} className="text-text-secondary" />
+                  <Moon size={20} className="text-slate-600" />
                 ) : (
-                  <Sun size={20} className="text-text-secondary" />
+                  <Sun size={20} className="text-slate-600" />
                 )}
-                <span className="text-text-primary">
+                <span className="text-slate-900 font-medium">
                   {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
                 </span>
               </button>

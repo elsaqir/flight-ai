@@ -142,34 +142,34 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
             initial={{ opacity: 0, x: 400 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 400 }}
-            className="fixed right-4 top-4 bottom-4 w-96 bg-primary-bg border border-border-primary rounded-2xl flex flex-col z-50 shadow-xl"
+            className="fixed right-4 top-4 bottom-4 w-96 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-3xl flex flex-col z-50 shadow-2xl"
           >
-            <div className="p-6 border-b border-border-primary">
+            <div className="p-6 border-b border-slate-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-500/10 rounded-lg relative">
-                    <Bot size={20} className="text-purple-500" />
+                  <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl relative">
+                    <Bot size={24} className="text-white" />
                     {isLoading && (
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 border-2 border-purple-500/30 border-t-purple-500 rounded-lg"
+                        className="absolute inset-0 border-2 border-purple-300 border-t-purple-600 rounded-2xl"
                       />
                     )}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-text-primary">AI Assistant</h3>
-                    <p className="text-sm text-text-secondary flex items-center gap-1">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <h3 className="font-bold text-slate-900 text-lg">AI Assistant</h3>
+                    <p className="text-sm text-slate-600 flex items-center gap-2">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                       {isLoading ? 'Thinking...' : 'Online'}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-primary-secondary rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
                 >
-                  <X size={20} className="text-text-primary" />
+                  <X size={20} className="text-slate-700" />
                 </button>
               </div>
             </div>
@@ -182,44 +182,44 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[85%] p-3 rounded-2xl ${
+                  <div className={`max-w-[85%] p-4 rounded-2xl ${
                     message.type === 'user' 
-                      ? 'bg-accent-primary text-white' 
-                      : 'bg-primary-secondary text-text-primary border border-border-primary'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white' 
+                      : 'bg-slate-100 text-slate-900 border border-slate-200'
                   }`}>
                     <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                     
                     {message.flightSuggestions && message.flightSuggestions.length > 0 && (
-                      <div className="mt-3 space-y-3">
+                      <div className="mt-4 space-y-3">
                         {message.flightSuggestions.map((flight) => (
                           <motion.div 
                             key={flight.id} 
-                            className="p-3 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition-colors border border-white/10"
+                            className="p-4 bg-white/80 hover:bg-white rounded-2xl cursor-pointer transition-all duration-200 border border-slate-200"
                             whileHover={{ scale: 1.02 }}
                             onClick={() => handleFlightSelect(flight)}
                           >
-                            <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center gap-2">
-                                <Plane size={14} className="text-accent-primary" />
-                                <span className="text-xs font-medium">{flight.airline}</span>
+                                <Plane size={16} className="text-blue-600" />
+                                <span className="text-sm font-semibold text-slate-900">{flight.airline}</span>
                               </div>
-                              <span className="text-sm font-bold text-accent-primary">
+                              <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                                 ${flight.price}
                               </span>
                             </div>
                             
-                            <div className="flex items-center justify-between text-xs opacity-80 mb-1">
+                            <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
                               <div className="flex items-center gap-1">
-                                <MapPin size={12} />
+                                <MapPin size={14} />
                                 <span>{flight.departure.city} → {flight.arrival.city}</span>
                               </div>
                               <div className="flex items-center gap-1">
-                                <Clock size={12} />
+                                <Clock size={14} />
                                 <span>{flight.duration}</span>
                               </div>
                             </div>
                             
-                            <div className="flex items-center justify-between text-xs opacity-70">
+                            <div className="flex items-center justify-between text-sm text-slate-500">
                               <span>{flight.departure.time} - {flight.arrival.time}</span>
                               <span>{flight.stops === 0 ? 'Direct' : `${flight.stops} stop${flight.stops > 1 ? 's' : ''}`}</span>
                             </div>
@@ -237,22 +237,22 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-primary-secondary text-text-primary border border-border-primary p-3 rounded-2xl">
+                  <div className="bg-slate-100 text-slate-900 border border-slate-200 p-4 rounded-2xl">
                     <div className="flex items-center gap-2">
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 1, repeat: Infinity }}
-                        className="w-2 h-2 bg-accent-primary rounded-full"
+                        className="w-2 h-2 bg-blue-600 rounded-full"
                       />
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                        className="w-2 h-2 bg-accent-primary rounded-full"
+                        className="w-2 h-2 bg-blue-600 rounded-full"
                       />
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                        className="w-2 h-2 bg-accent-primary rounded-full"
+                        className="w-2 h-2 bg-blue-600 rounded-full"
                       />
                     </div>
                   </div>
@@ -262,8 +262,8 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-4 border-t border-border-primary">
-              <div className="flex items-center gap-2">
+            <div className="p-4 border-t border-slate-200">
+              <div className="flex items-center gap-3">
                 <input
                   type="text"
                   value={inputValue}
@@ -271,18 +271,18 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
                   placeholder="Ask me about flights..."
                   disabled={isLoading}
-                  className="flex-1 px-4 py-2 rounded-lg text-sm disabled:opacity-50"
+                  className="flex-1 px-4 py-3 rounded-2xl text-sm disabled:opacity-50 bg-slate-100 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                 />
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isLoading}
-                  className="btn-primary p-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white p-3 rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
-                  <Send size={16} />
+                  <Send size={18} />
                 </button>
               </div>
               
-              <div className="mt-2 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 {[
                   "Find cheap flights to Europe",
                   "Business class to Tokyo",
@@ -292,7 +292,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   <button
                     key={suggestion}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className="text-xs px-2 py-1 bg-primary-secondary hover:bg-primary-tertiary rounded-lg text-text-secondary transition-colors"
+                    className="text-xs px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors"
                   >
                     {suggestion}
                   </button>
