@@ -1,10 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
+      },
+      screens: {
+        'xs': '475px',
+        'touch': { 'raw': '(hover: none)' },
+        'no-touch': { 'raw': '(hover: hover)' },
       },
       colors: {
         primary: {
@@ -31,6 +39,12 @@ export default {
         'md': 'var(--shadow-md)',
         'lg': 'var(--shadow-lg)',
         'xl': 'var(--shadow-xl)',
+      },
+      spacing: {
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-out',

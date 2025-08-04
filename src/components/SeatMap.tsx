@@ -69,23 +69,23 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-primary-bg rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-auto border border-border-primary"
+        className="bg-primary-bg rounded-2xl p-4 sm:p-6 max-w-4xl w-full max-h-[90vh] overflow-auto border border-border-primary mobile-scroll mobile-safe-area"
       >
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3 sm:gap-0">
           <div>
-            <h2 className="text-2xl font-bold text-text-primary">Select Your Seat</h2>
-            <p className="text-text-secondary">{seatMap.aircraft}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Select Your Seat</h2>
+            <p className="text-sm sm:text-base text-text-secondary">{seatMap.aircraft}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-primary-secondary rounded-lg transition-colors"
+            className="p-2 hover:bg-primary-secondary rounded-lg transition-colors touch-target self-end sm:self-auto"
           >
             <X size={24} className="text-text-primary" />
           </button>
         </div>
 
         {/* Seat legend */}
-        <div className="flex items-center gap-6 mb-6 p-4 bg-primary-secondary rounded-xl">
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-3 sm:gap-6 mb-4 sm:mb-6 p-3 sm:p-4 bg-primary-secondary rounded-xl">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-gray-300 rounded" />
             <span className="text-sm text-text-secondary">Economy</span>
@@ -109,19 +109,19 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
         </div>
 
         {/* Seat column headers */}
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-3 sm:mb-4">
           <div className="flex items-center gap-2">
-            <div className="w-8" />
+            <div className="w-6 sm:w-8" />
             {letters.map((letter, index) => (
               <div key={letter} className="flex items-center">
-                <div className="w-8 text-center text-sm font-medium text-text-secondary">
+                <div className="w-6 sm:w-8 text-center text-xs sm:text-sm font-medium text-text-secondary">
                   {letter}
                 </div>
                 {seatMap.layout.includes('777') && (index === 2 || index === 5) && (
-                  <div className="w-4" />
+                  <div className="w-2 sm:w-4" />
                 )}
                 {!seatMap.layout.includes('777') && index === 2 && (
-                  <div className="w-4" />
+                  <div className="w-2 sm:w-4" />
                 )}
               </div>
             ))}
@@ -129,11 +129,11 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
         </div>
 
         {/* Seat map */}
-        <div className="space-y-2 hide-scrollbar">
+        <div className="space-y-1 sm:space-y-2 hide-scrollbar">
           {Object.entries(seatRows).map(([rowNum, seats]) => (
             <div key={rowNum} className="flex justify-center">
               <div className="flex items-center gap-2">
-                <div className="w-8 text-center text-sm font-medium text-text-secondary">
+                <div className="w-6 sm:w-8 text-center text-xs sm:text-sm font-medium text-text-secondary">
                   {rowNum}
                 </div>
                 {seats.map((seat, index) => (
@@ -141,7 +141,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className={`w-8 h-8 rounded ${getSeatColor(seat)} transition-all duration-200 relative`}
+                      className={`w-6 h-6 sm:w-8 sm:h-8 rounded ${getSeatColor(seat)} transition-all duration-200 relative touch-target`}
                       onClick={() => handleSeatClick(seat)}
                       onMouseEnter={() => setHoveredSeat(seat)}
                       onMouseLeave={() => setHoveredSeat(null)}
@@ -152,10 +152,10 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
                       )}
                     </motion.button>
                     {seatMap.layout.includes('777') && (index === 2 || index === 5) && (
-                      <div className="w-4" />
+                      <div className="w-2 sm:w-4" />
                     )}
                     {!seatMap.layout.includes('777') && index === 2 && (
-                      <div className="w-4" />
+                      <div className="w-2 sm:w-4" />
                     )}
                   </div>
                 ))}
@@ -169,11 +169,11 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-primary-secondary rounded-xl p-4 shadow-lg max-w-xs border border-border-primary"
+            className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-primary-secondary rounded-xl p-3 sm:p-4 shadow-lg max-w-xs border border-border-primary z-10"
           >
             <div className="flex items-center gap-2 mb-2">
               <Info size={16} className="text-accent-primary" />
-              <span className="font-medium text-text-primary">
+              <span className="text-sm sm:text-base font-medium text-text-primary">
                 Seat {hoveredSeat.id}
               </span>
             </div>
@@ -202,9 +202,9 @@ export const SeatMap: React.FC<SeatMapProps> = ({ seatMap, onClose, onSeatSelect
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 flex justify-center"
+            className="mt-4 sm:mt-6 flex justify-center"
           >
-            <button className="btn-primary px-8 py-3 rounded-lg font-medium">
+            <button className="btn-primary px-6 sm:px-8 py-3 rounded-lg font-medium w-full sm:w-auto">
               Confirm Seat {selectedSeat.id}
               {selectedSeat.price && selectedSeat.price > 0 && (
                 <span className="ml-2">
